@@ -13,7 +13,6 @@ router.post("/", async (req, res) => {
     res.status(500).json(err);
   }
 });
-
 //update a post
 
 router.put("/:id", async (req, res) => {
@@ -29,7 +28,6 @@ router.put("/:id", async (req, res) => {
     res.status(500).json(err);
   }
 });
-
 //delete a post
 
 router.delete("/:id", async (req, res) => {
@@ -45,7 +43,6 @@ router.delete("/:id", async (req, res) => {
     res.status(500).json(err);
   }
 });
-
 //like / dislike a post
 
 router.put("/:id/like", async (req, res) => {
@@ -62,7 +59,6 @@ router.put("/:id/like", async (req, res) => {
     res.status(500).json(err);
   }
 });
-
 //get a post
 
 router.get("/:id", async (req, res) => {
@@ -86,6 +82,18 @@ router.get("/timeline/:userId", async (req, res) => {
       })
     );
     res.status(200).json(userPosts.concat(...friendPosts));
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//get user's all posts
+
+router.get("/profile/:username", async (req, res) => {
+  try {
+    const user = await User.findOne({ username: req.params.username });
+    const posts = await Post.find({ userId: user._id });
+    res.status(200).json(posts);
   } catch (err) {
     res.status(500).json(err);
   }
