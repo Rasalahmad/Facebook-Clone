@@ -11,14 +11,13 @@ const UserSchema = new mongoose.Schema(
     },
     email: {
       type: String,
-      require: true,
-      min: 2,
+      required: true,
       max: 50,
       unique: true,
     },
     password: {
       type: String,
-      require: true,
+      required: true,
       min: 6,
     },
     profilePicture: {
@@ -53,7 +52,7 @@ const UserSchema = new mongoose.Schema(
       type: String,
       max: 50,
     },
-    relationShip: {
+    relationship: {
       type: Number,
       enum: [1, 2, 3],
     },
